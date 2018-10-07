@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -210,10 +211,16 @@ from selenium import webdriver
 
 browser = webdriver.Chrome()
 browser.get('http://www.baidu.com')
+html=browser.page_source
+soup=BeautifulSoup(html,"lxml")
+print soup.prettify()
 browser.execute_script('window.open()')
 print(browser.window_handles)
 browser.switch_to_window(browser.window_handles[1])
 browser.get('http://www.taobao.com')
+html=browser.page_source
+soup=BeautifulSoup(html,"lxml")
+print soup.prettify()
 time.sleep(1)
 browser.switch_to_window(browser.window_handles[0])
 browser.get('http://python.org')
